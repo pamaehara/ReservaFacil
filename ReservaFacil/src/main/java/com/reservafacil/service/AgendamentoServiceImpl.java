@@ -24,7 +24,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 	private AgendamentoDAO agendamentoDAO;
 	
 	@Override
-	public List<String> inserirAgendamento(Agendamento agendamento) {
+	public String inserirAgendamento(Agendamento agendamento) {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
 		Set<ConstraintViolation<Agendamento>> constraintViolations = validator.validate(agendamento);
@@ -32,7 +32,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 		if(constraintViolations != null && constraintViolations.size() > 0) {
 			List<String> erros = new ArrayList<String>();
 			constraintViolations.forEach(erro -> erros.add(erro.getMessage()));
-			return erros;
+//			return erros;
 		}
 		
 		agendamentoDAO.inserirAgendamento(agendamento);

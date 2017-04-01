@@ -6,6 +6,6 @@ import com.reservafacil.model.Agendamento;
 
 public interface AgendamentoService {
 
-	public List<String> inserirAgendamento(Agendamento usuario);
+	public String inserirAgendamento(Agendamento agendamento);
 	public List<Agendamento> listaAgendamentos();
 }

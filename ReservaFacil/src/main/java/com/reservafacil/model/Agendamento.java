@@ -1,7 +1,8 @@
 package com.reservafacil.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,7 +45,7 @@ public class Agendamento {
 	@Column(name="dataAgendamento", unique=false)
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date dataAgendamento;
+	private LocalDate dataAgendamento;
 	
 	@Column(name="tipo", nullable=false, unique=false)
 	@NotEmpty
@@ -53,14 +54,14 @@ public class Agendamento {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="timestamp", unique=false, insertable=false)
-	private Date timestamp;
+	private LocalDateTime timestamp;
 	
 	public Agendamento() {
 		super();
 	}
 
 	public Agendamento(int id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa,
-			Date timestamp, String tipo, Date dataAgendamento) {
+			LocalDateTime timestamp, String tipo, LocalDate dataAgendamento) {
 		super();
 		this.id = id;
 		this.contaOrigem = contaOrigem;
@@ -112,11 +113,11 @@ public class Agendamento {
 		this.taxa = taxa;
 	}
 
-	public Date getDataAgendamento() {
+	public LocalDate getDataAgendamento() {
 		return dataAgendamento;
 	}
 
-	public void setDataAgendamento(Date dataAgendamento) {
+	public void setDataAgendamento(LocalDate dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
 	}
 
@@ -130,14 +131,14 @@ public class Agendamento {
 	
 	@PrePersist
 	protected void onCreate() {
-	    if (timestamp == null) { timestamp = new Date(); }
+	    if (timestamp == null) { timestamp = LocalDateTime.now(); }
 	}
 
-	public Date getDataTransferencia() {
+	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 
-	public void setDataTransferencia(Date timestamp) {
+	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
 

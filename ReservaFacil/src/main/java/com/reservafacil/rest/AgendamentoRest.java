@@ -28,4 +28,10 @@ public class AgendamentoRest {
         return new ResponseEntity<List<Agendamento>>(agendamentos, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/agendar", method = RequestMethod.POST)
+	public ResponseEntity<String> agendar(Agendamento agendamento) {
+		String msg = agendamentoService.inserirAgendamento(agendamento);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
+	}
+	
 }
