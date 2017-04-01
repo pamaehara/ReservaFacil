@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
+import com.reservafacil.constante.TipoENUM;
 import com.reservafacil.model.Agendamento;
 
 public class TaxaATest {
@@ -14,7 +15,7 @@ public class TaxaATest {
 	@Test
 	public void calculaTaxaTest() {
 		Taxa taxa = new TaxaA();
-		Agendamento agendamento = new Agendamento(1, "12345-0", "54321-0", BigDecimal.valueOf(100), null, null, "A", LocalDate.now());
+		Agendamento agendamento = new Agendamento(1, "12345-0", "54321-0", BigDecimal.valueOf(100), null, null, TipoENUM.A, LocalDate.now());
 		BigDecimal taxaCalculada = taxa.calculaTaxa(agendamento);
 		assertEquals(BigDecimal.valueOf(5).setScale(2), taxaCalculada.setScale(2));
 	}

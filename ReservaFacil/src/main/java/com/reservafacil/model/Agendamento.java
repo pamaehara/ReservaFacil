@@ -6,16 +6,18 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.reservafacil.constante.TipoENUM;
 
 @Entity
 public class Agendamento {
@@ -43,16 +45,14 @@ public class Agendamento {
 	private BigDecimal taxa;
 	
 	@Column(name="dataAgendamento", unique=false)
-	@Temporal(TemporalType.DATE)
 	@NotNull
 	private LocalDate dataAgendamento;
 	
 	@Column(name="tipo", nullable=false, unique=false)
-	@NotEmpty
-	@Size(min=1, max=1)
-	private String tipo;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TipoENUM tipo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="timestamp", unique=false, insertable=false)
 	private LocalDateTime timestamp;
 	
@@ -61,7 +61,7 @@ public class Agendamento {
 	}
 
 	public Agendamento(int id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa,
-			LocalDateTime timestamp, String tipo, LocalDate dataAgendamento) {
+			LocalDateTime timestamp, TipoENUM tipo, LocalDate dataAgendamento) {
 		super();
 		this.id = id;
 		this.contaOrigem = contaOrigem;
@@ -121,11 +121,11 @@ public class Agendamento {
 		this.dataAgendamento = dataAgendamento;
 	}
 
-	public String getTipo() {
+	public TipoENUM getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoENUM tipo) {
 		this.tipo = tipo;
 	}
 	
