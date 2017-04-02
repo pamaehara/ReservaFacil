@@ -14,7 +14,7 @@ import com.reservafacil.model.Agendamento;
 import com.reservafacil.service.AgendamentoService;
 
 @RestController
-@RequestMapping("/agendamento")
+@RequestMapping("/api/agendamento")
 public class AgendamentoRest {
 
 	@Autowired

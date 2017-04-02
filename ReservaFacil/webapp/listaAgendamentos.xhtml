@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<p:messages id="messages" />
+	<h:form id="form">
+		<p:dataList value="#{AgendamentosMB.agendamentos}" var="agendamento"
+			type="ordered">
+			<f:facet name="header">
+            Agendamentos
+        	</f:facet>
+        	contaDestino: #{agendamento.contaDestino}, contaOrigem: #{agendamento.contaOrigem}, dataAgendamento: #{agendamento.dataAgendamento}, taxa: #{agendamento.taxa}, tipo: #{agendamento.tipo}, valor: #{agendamento.valor}
+    	</p:dataList>
+		<p:commandButton value="Atualizar" icon="ui-icon-star"
+			action="#{AgendamentosMB.atualizar}" ajax="false">
+		</p:commandButton>
+	</h:form>
+</h:body>
+</html>

@@ -11,10 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.reservafacil.constante.TipoENUM;
@@ -52,8 +52,9 @@ public class Agendamento {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoENUM tipo;
-	
-	@Column(name="timestamp", unique=false, insertable=false)
+
+	@CreationTimestamp
+	@Column(name="timestamp", nullable=false, unique=false, insertable=true, columnDefinition="timestamp with time zone DEFAULT now()")
 	private LocalDateTime timestamp;
 	
 	public Agendamento() {
@@ -129,11 +130,6 @@ public class Agendamento {
 		this.tipo = tipo;
 	}
 	
-	@PrePersist
-	protected void onCreate() {
-	    if (timestamp == null) { timestamp = LocalDateTime.now(); }
-	}
-
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}

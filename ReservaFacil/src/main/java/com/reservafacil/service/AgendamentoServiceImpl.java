@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.reservafacil.dao.AgendamentoDAO;
-import com.reservafacil.factory.TaxaA;
+import com.reservafacil.factory.CriaTaxa;
 import com.reservafacil.model.Agendamento;
 
 @Service
@@ -23,14 +23,9 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 
 	@Autowired
 	private AgendamentoDAO agendamentoDAO;
+	
 	@Autowired
-	private TaxaA taxaA;
-	@Autowired
-	private TaxaA taxaB;
-	@Autowired
-	private TaxaA taxaC;
-	@Autowired
-	private TaxaA taxaD;
+	private CriaTaxa criaTaxa;
 
 	@Override
 	public List<String> inserirAgendamento(Agendamento agendamento) {
@@ -45,17 +40,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 				return msgs;
 			}
 
-			switch(agendamento.getTipo()) {
-			case A:
-				agendamento.setTaxa(taxaA.calculaTaxa(agendamento));
-			case B:
-				agendamento.setTaxa(taxaB.calculaTaxa(agendamento));
-			case C:
-				agendamento.setTaxa(taxaC.calculaTaxa(agendamento));
-			case D:
-				agendamento.setTaxa(taxaD.calculaTaxa(agendamento));
-			}
-
+			agendamento.setTaxa(criaTaxa.criaTaxa(agendamento.getTipo()).calculaTaxa(agendamento));
 			agendamentoDAO.inserirAgendamento(agendamento);
 			msgs.add("Agendamento cadastro com sucesso.");
 		} catch (Exception e) {
